@@ -1,12 +1,11 @@
 // require the restify library.
-var restify = require('restify'),
-// create an HTTP server.
-server = restify.createServer();
-// add a route that listens on http://localhost:5000/hello/world
-server.get('/hello', function (req, res, cb) {
-  res.send("Hello World!");
-  return cb();
+//var restify = require('restify')  // do not use restify now
+// use express for rest api - follow: 
+// http://bigspaceship.github.io/blog/2014/05/14/how-to-create-a-rest-api-with-node-dot-js/
+var express = require('express');
+var app = express();
+app.get('/', function(req, res) {
+  res.send('Hello Seattle\n');
 });
-server.listen(process.env.PORT || 5000, function () { // bind server to port 5000.
-  console.log('%s listening at %s', server.name, server.url);
-});
+app.listen(3001);
+console.log('Listening on port 3001...');
