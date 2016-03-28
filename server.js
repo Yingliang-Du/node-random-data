@@ -5,22 +5,37 @@
 var express = require('express');
 var app = express();
 
-var data = require('./lib/data_source');
+var binder = require('./lib/data_source_binder');
 var generator = require('./lib/random_data_generator');
 
 app.get('/', function(req, res) {
     res.send('Return JSON or HTML View');
 });
 
+// endpoint for testing random data generator
 app.get('/test/:type', function(req, res) {
 
    // print out the request
    console.log(req.params);
-   // print out data
-   //console.log(data.random_bind);
+   // print out parameter
    console.log(generator(req.params.type));
 
    res.send(String(generator(req.params.type)));
+   res.end();
+});
+
+// endpoint for testing random data key binder
+// url: http://localhost:3001/bind?obj=objname&property=proname&type=typename
+app.get('/bind', function(req, res) {
+
+   // print out the request
+   console.log(req.params);
+   console.log(req.query);
+   var obj = req.query.obj;
+   var property = req.query.property;
+   var type = req.query.type;
+
+   res.send(String(binder(obj, property, type)));
    res.end();
 });
 
