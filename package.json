@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Yingliang-Du/node-random-data#readme",
   "dependencies": {
+    "dateformat": "^1.0.12",
     "express": "^4.13.4"
   }
 }
